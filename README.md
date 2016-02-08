@@ -590,7 +590,8 @@ mailman-unsubscribe:  "|/usr/lib/mailman/mail/mailman unsubscribe mailman"
 
 ##### Send a test message to the new group and make sure it's delivered
 mail mailman@[somedomain.whatever]
-```Subject: [time of day]
+```
+Subject: [time of day]
 Hello...
 .
 ```
