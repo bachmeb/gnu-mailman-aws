@@ -183,11 +183,13 @@ www	600	IN	CNAME	@
 ```
 
 ##### Complete the Request to Remove Email Sending Limitations form. Amazon owns reverse DNS for the EC2 instance. 
-https://aws.amazon.com/forms/ec2-email-limit-rdns-request?catalog=true&isauthcode=true
+* https://aws.amazon.com/forms/ec2-email-limit-rdns-request?catalog=true&isauthcode=true
 
 ##### Do a nslookup from your local machine to confirm the current status of reverse DNS.
 *At this point, it will probably still resolve to ec2-[your elastic ip address].us-west-2.compute.amazonaws.com. My reverse DNS resolved correctly about an hour after I submitted my request to remove email sending limitations.*  
-    nslookup -type=ptr [your elastic ip address]
+```
+nslookup -type=ptr [your elastic ip address]
+```
 
 ##### Try to telnet from your local machine to the Amazon SES SMTP endpoint on port 25.
 *If you cannot connect to the Amazon SES SMTP endpoint using telnet or openssl, then something in your network (for example, a firewall) is blocking outbound connections over the port you're trying to use.*  
