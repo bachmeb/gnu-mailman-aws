@@ -364,10 +364,10 @@ this is a test message
 ```
 
 ##### Check to see if the message was delivered
-cat /var/spool/mail/test
+	cat /var/spool/mail/test
 
 ##### Send a message to an external email address from root
-mail [external]@[email.address]
+	mail [external]@[email.address]
 ```
 Subject: [time of day]
 this is a test message
@@ -375,8 +375,10 @@ this is a test message
 ```
 
 ##### Check the external account to see if the message was delivered. 
+* gmail.com
 
 ##### Send a test message from the external email account to test@[somedomain.whatever]
+* gmail.com
 
 ##### Install Mutt
     yum install mutt
