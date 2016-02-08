@@ -388,7 +388,8 @@ this is a test message
 
 ##### Send a message to the alias
     mail aka
-```Subject: [time of day]
+```
+Subject: [time of day]
 Test mail to aka from root
 .
 ```
