@@ -179,7 +179,7 @@ www	600	IN	CNAME	@
 ##### Add a rule to the instance security group allowing SMTP traffic from anywhere
 ```
     Type	Protocol	Port Range	Source
-    HTTP	TCP		80		Anywhere 0.0.0.0/0
+    SMTP	TCP		25		Anywhere 0.0.0.0/0
 ```
 
 ##### Complete the Request to Remove Email Sending Limitations form. Amazon owns reverse DNS for the EC2 instance. 
