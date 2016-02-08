@@ -191,9 +191,11 @@ www	600	IN	CNAME	@
 nslookup -type=ptr [your elastic ip address]
 ```
 
-##### Try to telnet from your local machine to the Amazon SES SMTP endpoint on port 25.
+##### Try to telnet from your local machine to the Amazon SES SMTP endpoint on port 25.  
 *If you cannot connect to the Amazon SES SMTP endpoint using telnet or openssl, then something in your network (for example, a firewall) is blocking outbound connections over the port you're trying to use.*  
-    telnet email-smtp.us-west-2.amazonaws.com 25
+```
+telnet email-smtp.us-west-2.amazonaws.com 25
+```
 
 ##### Install telnet on the EC2 instance.
     yum install telnet
@@ -240,7 +242,6 @@ nslookup -type=ptr [your elastic ip address]
 
 ##### Edit the Postfix config file
     nano /etc/postfix/main.cf
-Add these lines
 ```
 # INTERNET HOST AND DOMAIN NAMES
 myhostname = [mail.somedomain.whatever]
