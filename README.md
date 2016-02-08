@@ -170,7 +170,7 @@ www	600	IN	CNAME	@
     ping [somedomain.whatever]
 
 ##### Add a SPF record to the DNS zone file.
-*SPF's purpose is to publish a list of outgoing mail servers. Any servers that do not deliver mail to the world, such as web servers or incoming-only mail servers, should not be listed.*
+[*SPF's purpose is to publish a list of outgoing mail servers. Any servers that do not deliver mail to the world, such as web servers or incoming-only mail servers, should not be listed.*](http://www.openspf.org/FAQ/Common_mistakes)
 ```
 ; TXT Records
 @	600	IN	TXT	"v=spf1 mx ~all"
