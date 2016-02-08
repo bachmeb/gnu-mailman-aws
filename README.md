@@ -152,7 +152,7 @@ chmod +x speedtest_cli.py
     ssh -i [pem file] ec2-user@[elastic ip address]
 
 ##### Create an MX record in the DNS zone file hosted by your DNS provider
-*Most Internet sites want to direct all inbound mail to a highly available mail server that is capable of handling all this traffic and have it distribute the mail locally. To announce this service, the site publishes a so-called MX record for its local domain in its DNS database. MX stands for Mail Exchanger and basically states that the server host is willing to act as a mail forwarder for all mail addresses in the domain.*  
+[*Most Internet sites want to direct all inbound mail to a highly available mail server that is capable of handling all this traffic and have it distribute the mail locally. To announce this service, the site publishes a so-called MX record for its local domain in its DNS database. MX stands for Mail Exchanger and basically states that the server host is willing to act as a mail forwarder for all mail addresses in the domain.*](http://www.tldp.org/LDP/nag2/x-087-2-mail.routing.html)
 ```
 ; A Records
 @	600	IN	A	[000.000.000.000] <-- The Elastic IP address
