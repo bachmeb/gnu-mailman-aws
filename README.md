@@ -99,23 +99,54 @@ https://aws.amazon.com/ec2/
 ##### Connect via SSH
 	ssh -i pemfile.pem ec2-user@[ec2.ipa.ddr.ess]
 
-##### Check the Linux distro version
-    cat /proc/version
+##### Check the time
+	date
+	
+##### List the available time zones
+	ls /usr/share/zoneinfo/
 
-##### Ask who am I?
-    whoami
+##### Update the /etc/sysconfig/clock file with your time zone
+	sudo vim /etc/sysconfig/clock
+```
+ZONE="America/New_York"
+UTC=false
+```
+
+##### Create a symbolic link between /etc/localtime and your time zone file
+	sudo ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+
+##### Edit the sysconfig network file
+	sudo nano /etc/sysconfig/network
+
+##### Change the hostname and save the file
+	HOSTNAME=mail.[somedomain.whatever]
+
+##### Change the command prompt to show the full hostname
+	export PS1='[\u@\H \W]\$'
+    
+##### Reboot the system to pick up the new time zone information in all services and applications
+	reboot
+
+##### Connect via SSH
+	ssh -i pemfile.pem ec2-user@[elastic ip address]
+
+##### Check the time
+	date
+	
+##### Check the Linux distro version
+	cat /proc/version
 
 ##### Switch to super user
-    sudo su
+	sudo su
 
-##### Ask what time is it?
-    date
-
+##### Ask who am I?
+	whoami
+    
 ##### Install Linux updates
-    yum update
+	yum update
 
 ##### Check python version. Should be 2.7+
-    python -V
+	python -V
 
 ##### Run a speed test (just for fun)
 ```
@@ -124,32 +155,19 @@ chmod +x speedtest_cli.py
 ./speedtest_cli.py
 ```
 ##### Install gcc
-    yum install gcc
+	yum install gcc
 
 ##### Install make
-    yum install make
+	yum install make
     
 ##### Install Apache
-    yum install httpd
+	yum install httpd
 
 ##### Get the IP address of the internal name server
-    grep nameserver /etc/resolv.conf
+	grep nameserver /etc/resolv.conf
 
 ##### Check the routing table
-    route
-
-##### Edit the sysconfig network file
-    nano /etc/sysconfig/network
-
-##### Change the hostname and save the file
-    HOSTNAME=mail.[somedomain.whatever]
-
-##### Change the command prompt to show the full hostname
-    export PS1='[\u@\H \W]\$'
-
-##### Reboot and reconnect
-    reboot
-    ssh -i [pem file] ec2-user@[elastic ip address]
+	route
 
 ##### Create an MX record in the DNS zone file hosted by your DNS provider
 [*Most Internet sites want to direct all inbound mail to a highly available mail server that is capable of handling all this traffic and have it distribute the mail locally. To announce this service, the site publishes a so-called MX record for its local domain in its DNS database. MX stands for Mail Exchanger and basically states that the server host is willing to act as a mail forwarder for all mail addresses in the domain.*](http://www.tldp.org/LDP/nag2/x-087-2-mail.routing.html)
