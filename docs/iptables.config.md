@@ -133,6 +133,9 @@ iptables: Unloading modules:                               [  OK  ]
 ##### Read the firewall rules
 	sudo cat /etc/sysconfig/iptables
 
+##### Start iptables
+	sudo service iptables start
+	
 ##### Add a rule to drop traffic from a malcious IP address
 	sudo /sbin/iptables -I INPUT -j DROP -s [ --- malicious ip ---]
 
@@ -148,39 +151,33 @@ iptables: Unloading modules:                               [  OK  ]
 ##### Stop iptables	
 	sudo /etc/init.d/iptables stop
 
-##### Check the firewall rules
-	sudo iptables -vnL
-
-##### Start iptables
-	sudo /etc/init.d/iptables start
-
-##### Check the firewall rules
-	sudo iptables -vnL
-
-##### List all the rules in all the chains (-L). Avoid long reverse DNS lookups (-n). Verbose output (-v).
+##### Check the firewall rules. Should be empty.
 	sudo iptables -vnL
 ```c
 /*
-Chain INPUT (policy ACCEPT 69 packets, 3087 bytes)
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
  pkts bytes target     prot opt in     out     source               destination
-    0     0 DROP       all  --  *      *       [ --- malicious ip ---]       0.0.0.0/0
 
 Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
  pkts bytes target     prot opt in     out     source               destination
 
-Chain OUTPUT (policy ACCEPT 85 packets, 4923 bytes)
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
  pkts bytes target     prot opt in     out     source               destination
+
 */
 ```
+##### Start iptables
+	sudo /etc/init.d/iptables start
 
-
+##### Check the firewall rules. The previously saved rules should be displayed. 
+	sudo iptables -vnL
 
 ##### Make a firewall folder in your home directory
 	cd ~
 	mkdir firewall
 	cd firewall
 
-##### Make a bash script to read through the wizcrafts file and add DROP rules for every IP address
+##### Make a bash script to read through a text file and add DROP rules for every uncommented IP address
 	vim apply.rules.sh
 ```bash
 #!/bin/bash
@@ -189,10 +186,8 @@ Chain OUTPUT (policy ACCEPT 85 packets, 4923 bytes)
 # Ask for the name of the list
 read -p "Enter the file name: " file_name
 
-
 if [ -f $file_name ]; then
-   # Flush the rules in memory
-   # iptables -F
+
    # Get the list
    BLOCKDB=./$file_name
 
@@ -211,8 +206,15 @@ fi
 ##### Make the script executable
 	chmod u+x apply.rules.sh
 
-##### Run the script in debug mode
-	sudo bash -x ./apply.rules.sh
+##### Run the script in debug mode. Enter the unknown.txt file name.
+```
+sudo bash -x ./apply.rules.sh
+```
+```
+Enter the file name: unknown.txt
+```
+##### Confirm that the IP addresses have been blocked
+	sudo iptables -vnL
 
 ##### Refer to publicly available block lists for additional IP addresses. 
 	http://www.wizcrafts.net/iptables-blocklists.html
