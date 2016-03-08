@@ -9,7 +9,6 @@ This guide explains the process of blocking traffic on an EC2 instance from enti
 * http://www.wizcrafts.net/iptables-blocklists.html
 * https://mattwilcox.net/web-development/unexpected-ddos-blocking-china-with-ipset-and-iptables
 * https://wiki.centos.org/HowTos/Network/IPTables
-* 
 
 ##### Check the mail log for 'connect from unknown entries'
 	sudo cat /var/log/maillog | grep 'connect from unknown'
