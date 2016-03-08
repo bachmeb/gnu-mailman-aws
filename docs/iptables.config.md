@@ -31,6 +31,58 @@ This guide explains the process of blocking traffic on an EC2 instance from enti
 ##### See if iptables is set to start in runlevel 3
 	sudo chkconfig
 
+##### Read the iptables-config file in sysconfig
+	sudo cat /etc/sysconfig/iptables-config
+```bash
+# Load additional iptables modules (nat helpers)
+#   Default: -none-
+# Space separated list of nat helpers (e.g. 'ip_nat_ftp ip_nat_irc'), which
+# are loaded after the firewall rules are applied. Options for the helpers are
+# stored in /etc/modprobe.conf.
+IPTABLES_MODULES=""
+
+# Unload modules on restart and stop
+#   Value: yes|no,  default: yes
+# This option has to be 'yes' to get to a sane state for a firewall
+# restart or stop. Only set to 'no' if there are problems unloading netfilter
+# modules.
+IPTABLES_MODULES_UNLOAD="yes"
+
+# Save current firewall rules on stop.
+#   Value: yes|no,  default: no
+# Saves all firewall rules to /etc/sysconfig/iptables if firewall gets stopped
+# (e.g. on system shutdown).
+IPTABLES_SAVE_ON_STOP="no"
+
+# Save current firewall rules on restart.
+#   Value: yes|no,  default: no
+# Saves all firewall rules to /etc/sysconfig/iptables if firewall gets
+# restarted.
+IPTABLES_SAVE_ON_RESTART="no"
+
+# Save (and restore) rule and chain counter.
+#   Value: yes|no,  default: no
+# Save counters for rules and chains to /etc/sysconfig/iptables if
+# 'service iptables save' is called or on stop or restart if SAVE_ON_STOP or
+# SAVE_ON_RESTART is enabled.
+IPTABLES_SAVE_COUNTER="no"
+
+# Numeric status output
+#   Value: yes|no,  default: yes
+# Print IP addresses and port numbers in numeric format in the status output.
+IPTABLES_STATUS_NUMERIC="yes"
+
+# Verbose status output
+#   Value: yes|no,  default: yes
+# Print info about the number of packets and bytes plus the "input-" and
+# "outputdevice" in the status output.
+IPTABLES_STATUS_VERBOSE="no"
+
+# Status output with numbered lines
+#   Value: yes|no,  default: yes
+# Print a counter/number for every rule in the status output.
+IPTABLES_STATUS_LINENUMBERS="yes"
+```
 
 ##### Stop iptables
 	sudo service iptables stop
@@ -117,8 +169,8 @@ fi
 ##### Make the script executable
 	chmod u+x apply.rules.sh
 
-##### Run the script
-	sudo ./apply.rules.sh
+##### Run the script in debug mode
+	sudo bash -x ./apply.rules.sh
 	
 <!---
 ad ae af ag ai al am ao ap ar as at au aw az ba bb bd be bf bg bh bi bj bl bm bn bo bq br bs bt bw by bz ca cd cf cg ch ci ck cl cm cn co cr cu cv cw cy cz de dj dk dm do dz ec ee eg er es et eu fi fj fm fo fr ga gb gd ge gf gg gh gi gl gm gn gp gq gr gt gu gw gy hk hn hr ht hu id ie il im in io iq ir is it je jm jo jp ke kg kh ki km kn kp kr kw ky kz la lb lc li lk lr ls lt lu lv ly ma mc md me mf mg mh mk ml mm mn mo mp mq mr ms mt mu mv mw mx my mz na nc ne nf ng ni nl no np nr nu nz om pa pe pf pg ph pk pl pm pr ps pt pw py qa re ro rs ru rw sa sb sc sd se sg si sk sl sm sn so sr ss st sv sx sy sz tc td tg th tj tk tl tm tn to tr tt tv tw tz ua ug us uy uz va vc ve vg vi vn vu wf ws ye yt za zm zw
