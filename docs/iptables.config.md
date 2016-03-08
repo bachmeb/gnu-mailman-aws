@@ -11,6 +11,14 @@ This guide explains the process of blocking traffic on an EC2 instance from enti
 * https://wiki.centos.org/HowTos/Network/IPTables
 * 
 
+##### Check the mail log for 'connect from unknown entries'
+	sudo cat /var/log/maillog | grep 'connect from unknown'
+
+##### Get just the IP addresses
+	sudo cat /var/log/maillog | grep 'connect from unknown' 
+	sudo cat /var/log/maillog | grep 'connect from unknown' | sed s/^.*unknown/asdf/ 
+	sudo cat /var/log/maillog | grep 'connect from unknown' | sed s/^.*unknown/asdf/ | cut -d "[" -f2 
+	sudo cat /var/log/maillog | grep 'connect from unknown' | sed s/^.*unknown/asdf/ | cut -d "[" -f2 | cut -d "]" -f1
 
 ##### See if iptables is running
 	sudo service iptables status
@@ -175,7 +183,7 @@ read -p "Enter the file name: " file_name
 
 if [ -f $file_name ]; then
    # Flush the rules in memory
-   iptables -F
+   # iptables -F
    # Get the list
    BLOCKDB=./$file_name
 
