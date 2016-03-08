@@ -172,16 +172,12 @@ Chain OUTPUT (policy ACCEPT 85 packets, 4923 bytes)
 */
 ```
 
-##### Refer to publicly available block lists for additional IP addresses. 
-	http://www.wizcrafts.net/iptables-blocklists.html
+
 
 ##### Make a firewall folder in your home directory
 	cd ~
 	mkdir firewall
 	cd firewall
-
-##### Get a copy of one of the wizcrafts files
-	wget http://www.wizcrafts.net/chinese-iptables-blocklist.txt
 
 ##### Make a bash script to read through the wizcrafts file and add DROP rules for every IP address
 	vim apply.rules.sh
@@ -215,6 +211,15 @@ fi
 	chmod u+x apply.rules.sh
 
 ##### Run the script in debug mode
+	sudo bash -x ./apply.rules.sh
+
+##### Refer to publicly available block lists for additional IP addresses. 
+	http://www.wizcrafts.net/iptables-blocklists.html
+	
+##### Get a copy of one of the wizcrafts files
+	wget http://www.wizcrafts.net/chinese-iptables-blocklist.txt
+
+##### Run the script in debug mode against the wizcrafts file
 	sudo bash -x ./apply.rules.sh
 	
 <!---
