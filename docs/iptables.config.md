@@ -32,14 +32,16 @@ This guide explains the process of blocking traffic on an EC2 instance from enti
 ##### List all the rules in all the chains (-L). Avoid long reverse DNS lookups (-n). Verbose output (-v).
 	sudo iptables -vnL
 ```c
-// Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
-// pkts bytes target     prot opt in     out     source               destination
-// 
-// Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
-//  pkts bytes target     prot opt in     out     source               destination
-// 
-// Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
-//  pkts bytes target     prot opt in     out     source               destination
+/*
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+*/
 ```
 ##### Read the iptables file in sysconfig
 	sudo cat /etc/sysconfig/iptables
@@ -109,6 +111,7 @@ IPTABLES_STATUS_VERBOSE="no"
 # Print a counter/number for every rule in the status output.
 IPTABLES_STATUS_LINENUMBERS="yes"
 ```
+
 ##### Edit iptables-config and set IPTABLES_SAVE_ON_STOP to yes
 	sudo vim /etc/sysconfig/iptables-config
 ```bash
