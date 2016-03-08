@@ -20,6 +20,13 @@ This guide explains the process of blocking traffic on an EC2 instance from enti
 	sudo cat /var/log/maillog | grep 'connect from unknown' | sed s/^.*unknown/asdf/ | cut -d "[" -f2 
 	sudo cat /var/log/maillog | grep 'connect from unknown' | sed s/^.*unknown/asdf/ | cut -d "[" -f2 | cut -d "]" -f1
 
+##### Write the IP addresses to a file
+	sudo cat /var/log/maillog | grep 'connect from unknown' | sed s/^.*unknown/asdf/ | cut -d "[" -f2 | cut -d "]" -f1 > unknown.txt
+
+##### Sort the file and get the unique values
+	sort -u unknown.txt
+	sort -u unknown.txt > unique.txt
+
 ##### See if iptables is running
 	sudo service iptables status
 	
@@ -125,25 +132,30 @@ iptables: Unloading modules:                               [  OK  ]
 ##### Read the firewall rules
 	sudo cat /etc/sysconfig/iptables
 
-
-```c
-// iptables: Firewall is not running.
-```
-	sudo /etc/init.d/iptables start
-
 ##### Add a rule to drop traffic from a malcious IP address
 	sudo /sbin/iptables -I INPUT -j DROP -s [ --- malicious ip ---]
 
-	sudo iptables -vnL
-	sudo /etc/init.d/iptables save
-	
-	sudo cat /etc/sysconfig/iptables
-	sudo /etc/init.d/iptables stop
-	sudo iptables -vnL
-	sudo /etc/init.d/iptables start
+##### Confirm that the rule was added
 	sudo iptables -vnL
 
-	
+##### Save the rule
+	sudo /etc/init.d/iptables save
+
+##### Confirm that the rule was added to the iptables file in sysconfig
+	sudo cat /etc/sysconfig/iptables
+
+##### Stop iptables	
+	sudo /etc/init.d/iptables stop
+
+##### Check the firewall rules
+	sudo iptables -vnL
+
+##### Start iptables
+	sudo /etc/init.d/iptables start
+
+##### Check the firewall rules
+	sudo iptables -vnL
+
 ##### List all the rules in all the chains (-L). Avoid long reverse DNS lookups (-n). Verbose output (-v).
 	sudo iptables -vnL
 ```c
